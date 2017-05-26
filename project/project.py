@@ -18,6 +18,7 @@ from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler,MinMaxScaler
 from sklearn.decomposition import PCA
 from sklearn.metrics import f1_score,classification_report
+
 plt.style.use('ggplot')
 
 data = pd.read_csv('bank-additional-full.csv', sep = ';')
@@ -77,7 +78,7 @@ print(y.value_counts())
 ##importances_Tree = [importances_Tree[x] for x in order]
 ## CODE END
 
-parameters = {'kernel':('linear', 'rbf'), 'C':[1, 10]}
+parameters = {'kernel' : ['rbf'], 'C' : np.logspace(1,9,5), 'gamma' : np.logspace(1,9,5)}
 svr = SVC()
 clf = GridSearchCV(svr, parameters, cv = 5)
 clf.fit(X, y)
